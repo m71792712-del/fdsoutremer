@@ -15,7 +15,7 @@
 - Les cookies de session sont **séparés** (deux domaines `*.vercel.app` distincts) : se connecter au site ne connecte pas à l'admin.
 - Toute écriture sensible passe par une **fonction RPC** (validation, limitation de débit, audit en base). Le frontend valide aussi (Zod) pour l'ergonomie, mais **la base fait foi**.
 
-## 2. Variables d'environnement
+## 2. Variables d'environnement 
 
 | Variable | Frontend | Admin | Rôle |
 |---|---|---|---|

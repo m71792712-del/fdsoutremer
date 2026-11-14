@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { requireUser } from '@/lib/auth';
-import { getHistory, getLoan } from '@/lib/data';
+import { getLoan } from '@/lib/data';
 import { getT } from '@/lib/i18n';
 import { purposeLabel } from '@/lib/i18n/shared';
 import { createClient } from '@/lib/supabase/server';
@@ -21,7 +21,7 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
   const supabase = await createClient();
   const loan = await getLoan(supabase, user.id, id); // la demande d'un autre utilisateur renvoie 404
   if (!loan) notFound();
-  const history = await getHistory(supabase, id);
+  
 
   const purpose = loan.loan_purposes ? purposeLabel(loan.loan_purposes, locale) : loan.purpose_code;
   const bank = loan.banks?.name ?? (loan.custom_bank_name ? t('req.customBank', { name: loan.custom_bank_name }) : t('common.none'));
@@ -61,19 +61,9 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
 
         <section className="card">
           <h2 className="text-xl">{t('req.history')}</h2>
-          <ol className="mt-6 space-y-6 border-l-2 border-lagoon-200 pl-6">
-            {history.map((h) => (
-              <li key={h.id} className="relative">
-                <span className="absolute -left-[1.95rem] top-1 h-3 w-3 rounded-full bg-lagoon-500 ring-4 ring-white" aria-hidden />
-                <div className="flex flex-wrap items-center gap-2 text-sm">
-                  {h.old_status ? <><StatusBadge status={h.old_status} /><span aria-hidden className="text-navy-300">→</span></> : <span className="font-semibold text-navy-700">{t('req.created')}</span>}
-                  <StatusBadge status={h.new_status} />
-                </div>
-                <p className="mt-1.5 text-xs text-navy-500">{formatDate(h.created_at, locale, true)}</p>
-                {h.comment && <p className="mt-1.5 rounded-xl bg-navy-50 px-3 py-2 text-sm text-navy-700">{h.comment}</p>}
-              </li>
-            ))}
-          </ol>
+          <div className="mt-6">
+            <StatusBadge status={loan.status} />
+          </div>
         </section>
       </div>
     </div>
