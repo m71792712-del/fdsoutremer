@@ -290,5 +290,5 @@ export const fr: Dictionary = {
   'error.retry': 'Réessayer',
   'error.home': 'Retour à l’accueil',
   'error.notFound.title': 'Page introuvable',
-  'error.notFound.text': 'La page demandée n’existe pas ou a été déplacée.',
+  'error.notFound.text': 'La page demandée n’existe pas ou a été déplacé.',
 };
