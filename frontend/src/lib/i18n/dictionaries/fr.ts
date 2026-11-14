@@ -166,7 +166,7 @@ export const fr: Dictionary = {
   'apply.s2': 'Carte et vérification',
   'apply.s3': 'Récapitulatif',
   'apply.t1': 'Informations, motif et banque',
-  'apply.t2': 'Carte et vérification pédagogique',
+  'apply.t2': 'Carte et vérification',
   'apply.t3': 'Récapitulatif de votre demande',
   'apply.sec.info': 'Informations',
   'apply.sec.purpose': 'Motif',
