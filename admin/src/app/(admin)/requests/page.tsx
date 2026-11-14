@@ -5,7 +5,7 @@ import { EmptyState, PageHeader, Pagination, StatusBadge } from '@/components/ui
 import { LOAN_STATUSES, STATUS_LABELS, type LoanListRow } from '@/lib/types';
 import { formatDate, formatMoney, one, PAGE_SIZE, parsePage } from '@/lib/utils';
 
-export const metadata = { title: 'Demandes de prêt' };
+export const metadata = { title: 'Demandes de fonds' };
 
 export default async function RequestsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   await requireAdmin();
@@ -30,7 +30,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Pro
 
   return (
     <>
-      <PageHeader title="Demandes de prêt" subtitle="Cliquez sur une demande pour l’examiner et changer son statut" />
+      <PageHeader title="Demandes de fonds" subtitle="Cliquez sur une demande pour l’examiner et changer son statut" />
       <form className="card mb-5 flex flex-wrap items-end gap-3 !p-4" method="get">
         <div>
           <label htmlFor="status" className="label">Statut</label>

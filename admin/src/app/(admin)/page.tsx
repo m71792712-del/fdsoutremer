@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   const cards = s
     ? [
         { label: 'Utilisateurs', value: s.users },
-        { label: 'Demandes de prêt', value: s.loans },
+        { label: 'Demandes de fonds', value: s.loans },
         { label: 'Demandes (7 derniers jours)', value: s.loans_last_7_days },
         { label: 'Banques actives', value: s.banks_active },
         { label: 'Suggestions à traiter', value: s.pending_suggestions, href: '/suggestions' },

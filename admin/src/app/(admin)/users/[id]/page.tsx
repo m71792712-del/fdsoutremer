@@ -46,7 +46,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
 
         <section className="space-y-4 lg:col-span-2" aria-labelledby="loans">
           <div className="card">
-            <h2 id="loans" className="mb-3 text-xl">Demandes de prêt ({requests.length})</h2>
+            <h2 id="loans" className="mb-3 text-xl">Demandes de fonds ({requests.length})</h2>
             {requests.length > 0 && (
               <div className="mb-4 flex flex-wrap gap-2">
                 {Object.keys(STATUS_LABELS).filter((k) => counts[k]).map((k) => (
