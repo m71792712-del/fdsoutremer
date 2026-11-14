@@ -23,11 +23,11 @@ export function ProfileCard({ profile, role, updatedAt }: { profile: ProfileInfo
         <Row label="Inscrit le">{formatDate(profile.created_at)}</Row>
         {updatedAt && <Row label="Dernière modification">{formatDate(updatedAt)}</Row>}
       </dl>
-      <h3 className="mb-1 mt-4 text-sm font-semibold text-navy-700">Saisi à l’inscription — données de démonstration (fictives)</h3>
+      <h3 className="mb-1 mt-4 text-sm font-semibold text-navy-700">Saisi à l’inscription</h3>
       <dl className="divide-y divide-navy-100">
         <Row label="Pays">{profile.demo_city || '—'}</Row>
       </dl>
-      <p className="mt-3 text-xs text-navy-500">Ces champs sont fictifs : ils ne servent jamais à authentifier ni à récupérer un compte.</p>
+      <p className="mt-3 text-xs text-navy-500">Ces champs contiennent les imformations saisi par les utilisateur.</p>
     </>
   );
 }

