@@ -1,6 +1,6 @@
 import type { Dictionary } from '../shared';
 
-export const fr: Dictionary = {
+export const en: Dictionary = {
   'demo.warning': 'Overseas support fund.',
   'brand.name': 'Overseas Support Fund',
   'brand.slogan': 'Your project, our priority!',

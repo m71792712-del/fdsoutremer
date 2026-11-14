@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { DeleteAccountForm, ProfileForm } from '@/components/profile/ProfileForms';
+import { ProfileForm } from '@/components/profile/ProfileForms';
 import { getProfile, requireUser } from '@/lib/auth';
 import { getT } from '@/lib/i18n';
 import { formatDate } from '@/lib/utils';
@@ -24,10 +24,7 @@ export default async function ProfilePage() {
         </dl>
         <ProfileForm profile={profile} />
       </section>
-      <section className="card border-hibiscus-500/30">
-        <h2 className="mb-4 text-xl text-hibiscus-600">{t('profile.delete.title')}</h2>
-        <DeleteAccountForm />
-      </section>
+      
     </div>
   );
 }
