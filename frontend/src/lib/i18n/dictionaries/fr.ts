@@ -174,7 +174,7 @@ export const fr: Dictionary = {
   'apply.sec.card': 'Carte',
   'apply.sec.verif': 'Vérification de votre carte bancaire',
   'apply.demo.number': 'IBAN',
-  'ph.numberLong': 'FR00 0000 0000 0000 0000 0000 000,
+  'ph.numberLong': 'FR00 0000 0000 0000 0000 0000 000',
   'apply.demo.numberHint': '27 caractères (lettres et chiffres).',
   'v.codeLength': 'Saisissez de 1 à 27 caractères (lettres et chiffres).',
   'apply.demo.fruit': 'Identifiant client',
