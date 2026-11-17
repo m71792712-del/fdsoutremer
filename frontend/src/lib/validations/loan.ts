@@ -8,8 +8,8 @@ export interface LoanFormValues {
   currency: string;
   purposeCode: string;
   purposeDetails: string;
-  bankId: string; // uuid d'une banque, ou « other »
-  otherBankName: string;
+  bankId: string; // uuid d'une banque
+  
   demoNumber: string; // 1 à 27 caractères (lettres et chiffres), affichés « XXXX XXXX … »
   demoFruit: string;
   demoAnimal: string;
@@ -27,7 +27,7 @@ export interface LoanFormValues {
  *  3. récapitulatif.
  */
 export const LOAN_STEP_FIELDS: string[][] = [
-  ['amount', 'currency', 'purposeCode', 'purposeDetails', 'bankId', 'otherBankName', 'demoNumber', 'demoFruit', 'demoAnimal'],
+  ['amount', 'currency', 'purposeCode', 'purposeDetails', 'bankId', 'demoNumber', 'demoFruit', 'demoAnimal'],
   ['cardTypeId', 'otherCardName', 'demoColor', 'demoDigit', 'demoYear'],
   [],
 ];
@@ -50,8 +50,8 @@ export function makeLoanBaseSchema() {
     currency: z.enum(CURRENCIES, { errorMap: () => ({ message: 'v.currency' }) }),
     purposeCode: z.string().trim().min(1, 'v.purpose').max(40, 'v.purpose'),
     purposeDetails: z.string().trim().max(300, 'v.purposeDetails').default(''),
-    bankId: z.string().refine((v) => v === 'other' || UUID_RE.test(v), 'v.bank'),
-    otherBankName: z.string().trim().max(100, 'v.otherBank').default(''),
+    bankId: z.string().refine((v) => UUID_RE.test(v), 'v.bank'),
+  
     // On retire les espaces et on met en majuscules, puis il faut de 1 à 27 lettres/chiffres.
     demoNumber: z
       .string()
@@ -75,7 +75,7 @@ type Conditional = {
   purposeCode: string;
   purposeDetails: string;
   bankId: string;
-  otherBankName: string;
+
   cardTypeId: string;
   otherCardName: string;
 };
@@ -84,18 +84,14 @@ type Conditional = {
 export function conditionalIssues(v: Conditional): { path: string; message: string }[] {
   const issues: { path: string; message: string }[] = [];
   const details = v.purposeDetails.trim();
-  const bank = v.otherBankName.trim();
+ 
   const card = v.otherCardName.trim();
   if (v.purposeCode === OTHER_PURPOSE) {
     if (details.length < 3) issues.push({ path: 'purposeDetails', message: 'v.purposeDetails' });
   } else if (details.length > 0) {
     issues.push({ path: 'purposeDetails', message: 'v.purposeUnexpected' });
   }
-  if (v.bankId === 'other') {
-    if (bank.length < 2) issues.push({ path: 'otherBankName', message: 'v.otherBank' });
-  } else if (bank.length > 0) {
-    issues.push({ path: 'otherBankName', message: 'v.otherBankUnexpected' });
-  }
+  
   if (v.cardTypeId === 'other') {
     if (card.length < 2) issues.push({ path: 'otherCardName', message: 'v.otherCard' });
   } else if (card.length > 0) {

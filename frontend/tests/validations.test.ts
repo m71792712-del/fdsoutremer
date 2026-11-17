@@ -7,7 +7,7 @@ const BANK = '3f2b8c1e-5a4d-4e6f-9b7a-1c2d3e4f5a6b';
 const CARD = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
 const valid: LoanFormValues = {
   amount: '5000', currency: 'EUR',
-  purposeCode: 'personal', purposeDetails: '', bankId: BANK, otherBankName: '', demoNumber: 'AB12 CD34 EF56 GH78 IJ90 KL12 MN3', demoFruit: 'Mangue', demoAnimal: 'Iguane', cardTypeId: CARD, otherCardName: '',
+  purposeCode: 'personal', purposeDetails: '', bankId: BANK, demoNumber: 'AB12 CD34 EF56 GH78 IJ90 KL12 MN3', demoFruit: 'Mangue', demoAnimal: 'Iguane', cardTypeId: CARD, otherCardName: '',
   demoColor: '1234', demoDigit: '7', demoYear: '08/26',
 };
 const errs = (v: unknown) => {
@@ -58,11 +58,10 @@ describe('demande de prêt', () => {
     expect(errs({ ...valid, purposeCode: 'other', purposeDetails: 'Achat de matériel' })).toEqual([]);
     expect(errs({ ...valid, purposeDetails: 'texte' })).toContain('purposeDetails:v.purposeUnexpected');
   });
-  it('exige le nom de la banque uniquement pour « Autre banque »', () => {
-    expect(errs({ ...valid, bankId: 'other' })).toContain('otherBankName:v.otherBank');
-    expect(errs({ ...valid, bankId: 'other', otherBankName: 'Banque Locale' })).toEqual([]);
-    expect(errs({ ...valid, otherBankName: 'Banque Locale' })).toContain('otherBankName:v.otherBankUnexpected');
-    expect(errs({ ...valid, bankId: 'pas-un-uuid' })).toContain('bankId:v.bank');
+  it('refuse « other » et un identifiant de banque invalide', () => {
+    expect(errs({ ...valid, bankId: 'other' })).toContain('bankId:v.bank');
+    expect(errs({ ...valid, bankId: 'pas-un-uuid' })).toContain('bankid:v.bank');
+    
   });
   it('valide les champs fictifs', () => {
     expect(errs({ ...valid, demoNumber: '' })).toContain('demoNumber:v.codeLength');
@@ -100,7 +99,7 @@ describe('demande de prêt', () => {
   });
   it('3 étapes : 1 = informations + motif + banque, 2 = carte + vérification, 3 = récapitulatif', () => {
     expect(LOAN_STEP_FIELDS).toHaveLength(3);
-    expect(LOAN_STEP_FIELDS[0]).toEqual(['amount', 'currency', 'purposeCode', 'purposeDetails', 'bankId', 'otherBankName', 'demoNumber', 'demoFruit', 'demoAnimal']);
+    expect(LOAN_STEP_FIELDS[0]).toEqual(['amount', 'currency', 'purposeCode', 'purposeDetails', 'bankId', 'demoNumber', 'demoFruit', 'demoAnimal']);
     expect(LOAN_STEP_FIELDS[1]).toEqual(['cardTypeId', 'otherCardName', 'demoColor', 'demoDigit', 'demoYear']);
     expect(LOAN_STEP_FIELDS[2]).toEqual([]);
   });
